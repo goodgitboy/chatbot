@@ -10,6 +10,8 @@ window.
 """
 
 import argparse
+import os
+import sys
 import tkinter as tk
 from tkinter import ttk
 
@@ -118,11 +120,20 @@ def main() -> None:
     parser.add_argument("--topmost", action="store_true", help="Keep the window always on top.")
     args = parser.parse_args()
 
-    indicator = HangulEnglishIndicator(
-        start_korean=args.start_korean,
-        geometry=args.geometry,
-        topmost=args.topmost,
-    )
+    if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
+        sys.exit(
+            "그래픽 환경이 필요합니다. DISPLAY 환경 변수를 설정한 X11/Wayland 세션에서 실행해 주세요.",
+        )
+
+    try:
+        indicator = HangulEnglishIndicator(
+            start_korean=args.start_korean,
+            geometry=args.geometry,
+            topmost=args.topmost,
+        )
+    except tk.TclError as exc:
+        sys.exit(f"Tkinter 초기화에 실패했습니다: {exc}. 그래픽 환경을 확인해 주세요.")
+
     indicator.run()
 
 

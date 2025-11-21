@@ -11,6 +11,7 @@ python han_eng_indicator.py [--start-korean] [--geometry WIDTHxHEIGHT[+X+Y]] [--
 - `--start-korean`: 실행 시 상태를 "한국어"로 시작합니다.
 - `--geometry`: 창 크기와 위치를 직접 지정합니다(e.g. `320x180+100+100`).
 - `--topmost`: 다른 창 위에 항상 표시합니다.
+- 리눅스에서 실행할 때는 X11/Wayland와 같은 그래픽 환경에서 `DISPLAY` 환경 변수가 설정되어 있어야 합니다. 터미널만 있는 서버나 원격 세션에서 실행하면 바로 종료됩니다.
 
 ## 사용법
 
