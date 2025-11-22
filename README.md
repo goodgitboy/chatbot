@@ -1,13 +1,25 @@
----
-title: Chatbot
-emoji: 🌖
-colorFrom: gray
-colorTo: yellow
-sdk: gradio
-sdk_version: 3.21.0
-app_file: app.py
-pinned: false
-license: other
----
+# Chatbot 한/영 키 표시 도구
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+단순한 Tkinter 기반 스크립트로 현재 한/영 입력 상태를 화면에 표시합니다. 실제 운영체제 입력기(IMe) 상태를 조회하지는 못하며, 창이 포커스된 상태에서 한/영 토글 키를 누를 때 내부 상태를 전환해 화면에 반영합니다.
+
+## 실행 방법
+
+```bash
+python han_eng_indicator.py [--start-korean] [--geometry WIDTHxHEIGHT[+X+Y]] [--topmost]
+```
+
+- `--start-korean`: 실행 시 상태를 "한국어"로 시작합니다.
+- `--geometry`: 창 크기와 위치를 직접 지정합니다(e.g. `320x180+100+100`).
+- `--topmost`: 다른 창 위에 항상 표시합니다.
+- 리눅스에서 실행할 때는 X11/Wayland와 같은 그래픽 환경에서 `DISPLAY` 환경 변수가 설정되어 있어야 합니다. 터미널만 있는 서버나 원격 세션에서 실행하면 바로 종료됩니다.
+
+## 사용법
+
+- 창이 활성화된 상태에서 `한/영` 키(또는 `Hangul`, `Hangul_Mode`, `Hangul_Hanja`로 인식되는 키)를 누르면 상태가 "한국어"↔"영어"로 변경됩니다.
+- 일부 키보드는 `Shift+Space`로 한/영을 전환하므로, 같은 단축키도 지원합니다.
+- 상태가 실제 IME와 맞지 않는 경우 창에 있는 "상태 직접 변경" 버튼을 눌러 수동으로 맞출 수 있습니다.
+- 창을 빠르게 닫으려면 `Esc` 키를 누르세요.
+
+## 제한 사항
+
+- 운영체제나 IME API를 사용하지 않으므로, 표시되는 상태는 스크립트 내부에서 관리하는 값입니다. IME 상태와 자동 동기화되지는 않습니다.
